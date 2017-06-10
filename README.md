@@ -1,5 +1,5 @@
 # AspNetMvcReturnUrl
-Attributes in Asp .Net MVC to handle return path and return actions
+### Attributes in Asp .Net MVC to handle return url and return actions
 
 Let's say we have filtered list in "Index" view of StudentsController. Now, when the user edits one of the student and comes back to the "Index" view, then the user expects to see the filtered students again, so that he/she doesn't have to apply the filters again.
 
@@ -7,4 +7,101 @@ One way of handling this return is to pass the return url to "Edit" action of St
 
 The AspNet.Mvc.ReturnUrl library provides two attributes, ReturnsTo and ReturnsHere, that takes care of return path itself and the developer doesn't have to worry about managing the return path url.
 
-Note: Be sure to use distinct constants for ReturnUrlParameterName (This is the Request parameter that the library uses to formulate return url) for different ReturnsHere attributes. A ReturnsTo attribute that will return to previous ReturnsHere attribute will need to use the same constant value for ReturnUrlParameterName parameter.
+### Note: 
+Be sure to use distinct constants for ReturnUrlParameterName (This is the Request parameter that the library uses to formulate return url) for different ReturnsHere attributes. A ReturnsTo attribute that will return to previous ReturnsHere attribute will need to use the same constant value for ReturnUrlParameterName parameter.
+
+## Example
+Let we have model University and controller UniversitiesController. The Index action shows the list of universities after applying the filter and order.
+
+```CS
+public class UniversitiesController : Controller
+{
+	//GET
+	[ReturnsHere("RP_universities")]
+	public ActionResult Index(UniversitySearchParams searchParams, UniversityOrderbyParams orderBy){
+	   ...
+	   return View(list);
+	}
+	
+	//GET
+	[ReturnsTo("RP_universities")]
+	public ActionResult Edit(string id)
+	{
+		...
+		//this does not returns to RP_universities
+		return View(university);
+	}
+
+	[HttpPost]
+	public ActionResult Edit(University university)
+	{
+		if (ModelState.IsValid)
+		{
+			...
+			//this returns to RP_universities
+			return RedirectToAction("Index");
+		}
+		...
+		//this does not returns to RP_universities
+		return View(university);
+	}
+
+}
+
+```
+
+Further, we have StudentsController for Student model. Index of StudentsController takes universityId to show the list of students in that university. This action is referenced from UniversitiesController.Index view.
+
+
+```CS
+public class StudentsController : Controller
+{
+	//GET
+	[ReturnsTo("RP_universities")]
+	[ReturnsHere("RP_students")]
+	public ActionResult Index(String universityId, StudentSearchParams searchParams, StudentOrderbyParams orderBy){
+	   ...
+	   if(...){
+			//this returns to RP_universities
+			//No need to worry about filter parameters applied in UniversitiesController.Index
+			return RedirectToAction("Index", "Universities");
+	   }
+	   ...
+	   return View(list);
+	}
+	
+	//GET
+	[ReturnsTo("RP_students")]
+	public ActionResult Edit(string id)
+	{
+		...
+		//this does not returns to RP_students
+		return View(university);
+	}
+
+	[HttpPost]
+	public ActionResult Edit(University university)
+	{
+		if (ModelState.IsValid)
+		{
+			...
+			//this returns to RP_students
+			return RedirectToAction("Index");
+		}
+		...
+		//this does not returns to RP_students
+		return View(university);
+	}
+
+}
+
+```
+
+Further, StudentsController.Index view can have a url back to UniversitiesController.Index action as:
+
+```CS
+//No need to worry about filter parameters applied in UniversitiesController.Index
+@Html.ActionLink("Back to Universities", "Index", "Universities") 
+```
+##### [Bikash Bishwokarma](https://bbishwokarma.github.io/)
+
