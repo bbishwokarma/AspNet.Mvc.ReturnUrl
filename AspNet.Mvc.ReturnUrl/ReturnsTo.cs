@@ -1,0 +1,71 @@
+﻿using System.Web.Mvc;
+
+namespace AspNet.Mvc.ReturnUrl
+{
+    public class ReturnsTo : ReturnPathBase
+    {
+        public ReturnsTo(string _returnUrlParameterName) : base(_returnUrlParameterName)
+        {
+        }
+
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            if (filterContext.HttpContext.Request.UrlReferrer == null)
+            {
+                return;
+            }
+            if (filterContext.HttpContext.Request.HttpMethod != "GET")
+            {
+                return;
+            }
+            string returnPath = ReadReturnpath(filterContext);
+            if (IsValidUrl(returnPath))
+            {
+                //set view data so that view can access return url easily, in case the view wants, e.g., in BACK button.
+                filterContext.Controller.ViewData[ReturnUrlParameterName] = returnPath;
+                //returnpath is already set in url. No need to set it again.
+                return;
+            }
+            string referrer = filterContext.HttpContext.Request.UrlReferrer.PathAndQuery.Trim();
+
+            //if the referrer URL has return path that needs to be passed to current url, read the return path from referrer.
+            returnPath = ReadReturnpath(filterContext.HttpContext.Request.UrlReferrer);
+
+            if (!IsValidUrl(returnPath))
+            {
+                //referrer will be the return path.
+                returnPath = referrer;
+            }
+            string current = filterContext.HttpContext.Request.Url.PathAndQuery;
+            if (IsValidUrl(referrer) && !referrer.ToUpper().Trim().Equals(current.Trim().ToUpper()))
+            {
+                //new URL with return path added as query string.
+                string newPath = current + (current.Contains("?") ? "&" : "?") + ReturnUrlParameterName + "=" + System.Web.HttpUtility.UrlEncode(returnPath);
+
+                filterContext.Result = new RedirectResult(newPath);
+            }
+        }
+
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            if (filterContext.Result is ViewResult)
+            {
+                return;
+            }
+            if (filterContext.HttpContext.Request.HttpMethod == "GET")
+            {
+                return;
+            }
+            string returnPath = ReadReturnpath(filterContext);
+            if (!IsValidUrl(returnPath))
+            {
+                returnPath = ReadReturnpath(filterContext.HttpContext.Request.UrlReferrer);
+            }
+            if (IsValidUrl(returnPath))
+            {
+                //override the action's redirect URL with new redirect URL which is the actual return path.
+                filterContext.Result = new RedirectResult(returnPath);
+            }
+        }
+    }
+}
