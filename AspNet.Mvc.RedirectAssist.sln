@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{A4DD436E-2620-430B-A7A0-EAF117BFC535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet.Mvc.ReturnUrl", "AspNet.Mvc.ReturnUrl\AspNet.Mvc.ReturnUrl.csproj", "{379A77C3-4DD8-404B-952D-3EB4AA4AE9A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNet.Mvc.RedirectAssist", "AspNet.Mvc.RedirectAssist\AspNet.Mvc.RedirectAssist.csproj", "{379A77C3-4DD8-404B-952D-3EB4AA4AE9A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -63,9 +63,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReturnPathBase.cs" />
-    <Compile Include="ReturnsHere.cs" />
-    <Compile Include="ReturnsTo.cs" />
+    <Compile Include="ParameterizedRedirectionBase.cs" />
+    <Compile Include="ReturnsUsingParameter.cs" />
+    <Compile Include="RedirectsBackUsingParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

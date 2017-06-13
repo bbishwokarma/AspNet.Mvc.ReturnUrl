@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Web.Mvc;
 
-namespace AspNet.Mvc.ReturnUrl
+namespace AspNet.Mvc.RedirectAssist
 {
-    public abstract class ReturnPathBase : FilterAttribute, IActionFilter, IResultFilter
+    public abstract class ParameterizedRedirectionBase : FilterAttribute, IActionFilter, IResultFilter
     {
         public string ReturnUrlParameterName { get; set; }
 
-        public ReturnPathBase(string _returnUrlParameterName)
+        public ParameterizedRedirectionBase(string _returnUrlParameterName)
         {
             this.ReturnUrlParameterName = _returnUrlParameterName;
         }

@@ -1,10 +1,15 @@
 ﻿using System.Web.Mvc;
 
-namespace AspNet.Mvc.ReturnUrl
+namespace AspNet.Mvc.RedirectAssist
 {
-    public class ReturnsTo : ReturnPathBase
+    public class RedirectsBackUsingParameter : ParameterizedRedirectionBase
     {
-        public ReturnsTo(string _returnUrlParameterName) : base(_returnUrlParameterName)
+        /// <summary>
+        /// This attribute is used to remember the ParameterName used in ReturnsUsingParameter attribute in the URL (for stateless). 
+        /// Whenever a redirection to ReturnsUsingParameter is made, the parameter values would be recovered from the ParameterName.
+        /// </summary>
+        /// <param name="ParameterName">Use same value of ParameterName used in ReturnsUsingParameter</param>
+        public RedirectsBackUsingParameter(string ParameterName) : base(ParameterName)
         {
         }
 

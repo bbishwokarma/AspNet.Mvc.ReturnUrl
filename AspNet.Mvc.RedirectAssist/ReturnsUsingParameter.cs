@@ -1,10 +1,14 @@
 ﻿using System.Web.Mvc;
 
-namespace AspNet.Mvc.ReturnUrl
+namespace AspNet.Mvc.RedirectAssist
 {
-    public class ReturnsHere : ReturnPathBase
+    public class ReturnsUsingParameter : ParameterizedRedirectionBase
     {
-        public ReturnsHere(string _returnUrlParameterName) : base(_returnUrlParameterName)
+        /// <summary>
+        /// When a redirection to this action is made, then ParameterName is used to recover the filter parameters previously applied on this action.
+        /// </summary>
+        /// <param name="ParameterName">Distinct name of parameter that would be used for this redirection.</param>
+        public ReturnsUsingParameter(string ParameterName) : base(ParameterName)
         {
         }
 

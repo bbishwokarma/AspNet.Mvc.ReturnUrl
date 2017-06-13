@@ -211,9 +211,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AspNet.Mvc.ReturnUrl\AspNet.Mvc.ReturnUrl.csproj">
+    <ProjectReference Include="..\AspNet.Mvc.RedirectAssist\AspNet.Mvc.RedirectAssist.csproj">
       <Project>{379a77c3-4dd8-404b-952d-3eb4aa4ae9a1}</Project>
-      <Name>AspNet.Mvc.ReturnUrl</Name>
+      <Name>AspNet.Mvc.RedirectAssist</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

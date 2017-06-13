@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using ReturnUrlTest.DataAccess;
 using ReturnUrlTest.Models;
 using ReturnUrlTest.ViewModels;
-using AspNet.Mvc.ReturnUrl;
+using AspNet.Mvc.RedirectAssist;
 
 namespace ReturnUrlTest.Controllers
 {
@@ -12,7 +12,7 @@ namespace ReturnUrlTest.Controllers
     {
         private StudentDataAccess db = new StudentDataAccess();
 
-        [ReturnsHere(Constants.ReturnsToStudents)]
+        [ReturnsUsingParameter(Constants.ReturnsToStudents)]
         public ActionResult Index(StudentsViewModel model)
         {
             if (model == null)
@@ -31,7 +31,7 @@ namespace ReturnUrlTest.Controllers
             return View(model);
         }
 
-        [ReturnsTo(Constants.ReturnsToStudents)]
+        [RedirectsBackUsingParameter(Constants.ReturnsToStudents)]
         public ActionResult Details(string id)
         {
             if (id == null)
@@ -46,7 +46,7 @@ namespace ReturnUrlTest.Controllers
             return View(student);
         }
 
-        [ReturnsTo(Constants.ReturnsToStudents)]
+        [RedirectsBackUsingParameter(Constants.ReturnsToStudents)]
         public ActionResult Create()
         {
             return View();
@@ -64,7 +64,7 @@ namespace ReturnUrlTest.Controllers
             return View(student);
         }
 
-        [ReturnsTo(Constants.ReturnsToStudents)]
+        [RedirectsBackUsingParameter(Constants.ReturnsToStudents)]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -96,7 +96,7 @@ namespace ReturnUrlTest.Controllers
             return View(student);
         }
 
-        [ReturnsTo(Constants.ReturnsToStudents)]
+        [RedirectsBackUsingParameter(Constants.ReturnsToStudents)]
         public ActionResult Delete(string id)
         {
             if (id == null)
