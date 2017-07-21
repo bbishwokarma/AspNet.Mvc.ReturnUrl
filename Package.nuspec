@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>AspNet.Mvc.RedirectAssist</id>
+    <version>1.0.0.0</version>
+	<title>Attributes in Asp .Net MVC to handle filter parameters applied in an action in which we will be returning back later</title>
+	<summary>Provides two attributes, RedirectsBackUsingParameter and ReturnsUsingParameter, that takes care of return path itself and the developer doesn't have to worry about managing the return path url to an action, when multiple parameters need to be preserved.</summary>
+    <authors>Bikash Bishwokarma</authors>
+    <owners>Bikash Bishwokarma</owners>
+    <licenseUrl>https://github.com/bbishwokarma/AspNetMvcRedirectAssist/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/bbishwokarma/AspNetMvcRedirectAssist</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>If we have to navigate back to previous path in ASP.NET MVC and meantime we need to preserve the parameters in the previous path, a developer needs to take care of all of the parameters during redirect action and in view for the link to previous action. To get rid of this tedious task, this framework provides attributes those will take care of remembering the parameters in the previous action. Please review project site for details and instructions.</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>asp.net mvc redirect returns parameters</tags>
+    <dependencies>	  
+	  <dependency id="Microsoft.AspNet.Mvc" version="5.2.3" />
+	  <dependency id="Microsoft.AspNet.Razor" version="3.2.3" />
+	  <dependency id="Microsoft.AspNet.WebPages" version="3.2.3"/>
+	  <dependency id="Microsoft.Web.Infrastructure" version="1.0.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="AspNet.Mvc.RedirectAssist\bin\Release\AspNet.Mvc.RedirectAssist.dll" target="lib"/>
+  </files>
+</package>
