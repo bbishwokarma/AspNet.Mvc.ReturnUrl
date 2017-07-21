@@ -10,6 +10,10 @@ The AspNet.Mvc.AspNetMvcRedirectAssist library provides two attributes, Redirect
 ### Note: 
 Be sure to use distinct constants for ReturnUrlParameterName (This is the Request parameter that the library uses to formulate return url) for different ReturnsUsingParameter attributes. A RedirectsBackUsingParameter attribute that will return to previous ReturnsUsingParameter attribute will need to use the same constant value for ReturnUrlParameterName parameter.
 
+## Where to Find from?
+Get from [nuget](https://www.nuget.org/packages/AspNet.Mvc.RedirectAssist/)
+
+
 ## Example
 Let we have model University and controller UniversitiesController. The Index action shows the list of universities after applying the filter and order.
 
